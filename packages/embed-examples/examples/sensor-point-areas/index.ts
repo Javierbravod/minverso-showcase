@@ -20,6 +20,7 @@ const main = async () => {
 
 
 
+try {
 // 4. Etiqueta con Página Web (Portal Minverso)
 const [minversoSandboxId] = await sdk.Tag.registerSandbox(
   `<iframe src="https://minverso.com/" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>`,
@@ -339,6 +340,29 @@ sdk.Tag.add({
   stemVector: { x: 0, y: 0, z: 0 }, 
   attachments: [shortSandboxId]
 });
+} catch (error) {
+  console.error(error);
+  const errorAlert = document.createElement('div');
+  errorAlert.style.position = 'absolute';
+  errorAlert.style.top = '20px';
+  errorAlert.style.left = '50%';
+  errorAlert.style.transform = 'translateX(-50%)';
+  errorAlert.style.backgroundColor = '#e74c3c';
+  errorAlert.style.color = 'white';
+  errorAlert.style.padding = '20px';
+  errorAlert.style.borderRadius = '8px';
+  errorAlert.style.zIndex = '999999';
+  errorAlert.style.fontFamily = 'sans-serif';
+  errorAlert.style.boxShadow = '0 4px 15px rgba(0,0,0,0.4)';
+  errorAlert.style.textAlign = 'center';
+  errorAlert.innerHTML = `
+    <h3 style="margin-top:0">⚠️ Acceso Limitado a "Sandboxes"</h3>
+    <p style="margin-bottom:10px">La conexión con Matterport fue exitosa, pero <b>no cargaron las etiquetas interactivas</b> (Checklists, minverso, video).</p>
+    <p style="font-size:14px; opacity:0.9"><b>Motivo más probable:</b> Tu Llave SDK es gratuita/estándar. El uso de HTML avanzado dentro de etiquetas requiere habilitar la funcionalidad "Sandbox" para tu licencia.</p>
+    <p style="font-size:12px; margin-top:15px; background:rgba(0,0,0,0.2); padding:5px; border-radius:4px;">Error técnico: ${error}</p>
+  `;
+  document.body.appendChild(errorAlert);
+}
 
 
 
