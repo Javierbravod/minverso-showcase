@@ -21,7 +21,7 @@ const main = async () => {
 
 
 try {
-  await sdk.Tag.add(
+  const tags = [
     // 4. Etiqueta con Página Web (Portal Minverso)
     {
       label: "Portal Minverso",
@@ -84,7 +84,15 @@ try {
       anchorPosition: { x: -20.14494392712383, y: 2.66628277778894367, z: 1.8595612150004504 },
       stemVector: { x: 0, y: 0, z: 0 }
     }
-  );
+  ];
+
+  for (const t of tags) {
+    try {
+      await sdk.Tag.add(t);
+    } catch (e) {
+      console.error("No se pudo agregar el tag:", t.label, e);
+    }
+  }
   console.log("¡Todas las etiquetas nativas cargadas exitosamente!");
 } catch (error) {
   console.error("Error cargando etiquetas:", error);
