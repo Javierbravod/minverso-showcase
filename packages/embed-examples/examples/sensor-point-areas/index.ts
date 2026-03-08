@@ -23,69 +23,86 @@ const main = async () => {
 try {
   const tagsObj = [
     {
+      id: "minverso_0",
       label: "Portal Minverso",
       description: "Visita la web en: https://minverso.com/",
       anchorPosition: { x: -17.48317675608226, y: 1.5187469757876864, z: -2.091560056023497 },
       stemVector: { x: 0, y: 0, z: 0.3 }, 
-      color: { r: 0.1, g: 0.5, b: 0.9 }
+      color: { r: 0.1, g: 0.5, b: 0.9 },
+      stemVisible: true
     },
     {
+      id: "minverso_1",
       label: "Checklist de Procedimiento",
       description: "1. Verificar entorno\n2. Desconectar fuentes\n3. Instalar candado\n4. Confirmar energía 0",
       anchorPosition: { x: -18.84844260110858, y: 1.4173556575678552, z: -2.2862425066143888 },
-      stemVector: { x: 0, y: 0, z: 0.3 }
+      stemVector: { x: 0, y: 0, z: 0.3 },
+      color: { r: 0, g: 0, b: 1 },
+      stemVisible: true
     },
     {
+      id: "minverso_2",
       label: "Paso 1: Notificación",
       description: "Asegurar que el área sabe que el equipo se va a detener.",
       anchorPosition: { x: -20.150332696302176, y: 1.3709234770882979, z: 1.9866658130739545 },
       stemVector: { x: 0.3, y: 0, z: 0 }, 
-      color: { r: 1.0, g: 0.6, b: 0.0 }
+      color: { r: 1.0, g: 0.6, b: 0.0 },
+      stemVisible: true
     },
     {
+      id: "minverso_3",
       label: "Paso 2: Identificación",
       description: "Encontrar el punto exacto para cortar energía.",
       anchorPosition: { x: -18.529327892253587, y: 1.3973318241732346, z: -2.28414095753124 },
       stemVector: { x: 0, y: 0, z: 0.3 },
-      color: { r: 0.0, g: 0.6, b: 1.0 }
+      color: { r: 0.0, g: 0.6, b: 1.0 },
+      stemVisible: true
     },
     {
+      id: "minverso_4",
       label: "Paso 3: Aislamiento",
       description: "Cortar físicamente el flujo de energía.",
       anchorPosition: { x: -18.177982691555478, y: 1.436838075870597, z: -2.2840438033412074 },
       stemVector: { x: 0, y: 0, z: 0.3 }, 
-      color: { r: 1.0, g: 0.2, b: 0.2 }
+      color: { r: 1.0, g: 0.2, b: 0.2 },
+      stemVisible: true
     },
     {
+      id: "minverso_5",
       label: "Paso 4: Equipamiento LOTO",
       description: "Obtener herramientas LOTO.",
       anchorPosition: { x: -12.616050346465235, y: 1.071646749466924, z: -2.3779522150944175 },
       stemVector: { x: -0.3, y: 0, z: 0 }, 
-      color: { r: 0.9, g: 0.8, b: 0.1 }
+      color: { r: 0.9, g: 0.8, b: 0.1 },
+      stemVisible: true
     },
     {
+      id: "minverso_6",
       label: "Paso 5: Bloqueo Físico",
       description: "Bloquear interruptor por seguridad.",
       anchorPosition: { x: -18.35398795122292, y: 1.1958310971101018, z: -2.2819071505573754 },
       stemVector: { x: 0, y: 0, z: 0.3 }, 
-      color: { r: 0.1, g: 0.8, b: 0.4 }
+      color: { r: 0.1, g: 0.8, b: 0.4 },
+      stemVisible: true
     },
     {
+      id: "minverso_7",
       label: "Ver Instrucción en Video",
       description: "Mira el video haciendo clic aquí.",
       anchorPosition: { x: -20.14494392712383, y: 2.66628277778894367, z: 1.8595612150004504 },
-      stemVector: { x: 0, y: 0, z: 0 }
+      stemVector: { x: 0, y: 0, z: 0 },
+      color: { r: 1.0, g: 1.0, b: 1.0 },
+      stemVisible: true
     }
   ];
 
-  tagsObj.forEach((tag) => {
-    sdk.Tag.add(tag)
-      .then(() => {
-        console.log("¡Etiqueta cargada exitosamente!", tag.label);
-      })
-      .catch((error) => {
-        console.error("Error cargando etiqueta:", tag.label, error);
-      });
+  tagsObj.forEach(async (tag: any) => {
+    try {
+      tag.id = await sdk.Tag.add(tag);
+      console.log("¡Etiqueta cargada exitosamente!", tag);
+    } catch (e) {
+      console.error("Error cargando etiqueta:", tag.label, e);
+    }
   });
 
 } catch (error) {
