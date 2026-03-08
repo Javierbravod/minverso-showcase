@@ -28,6 +28,7 @@
     "bootstrap": "lerna bootstrap && lerna link",
     "clean": "lerna clean --yes",
     "clean-install": "yarn clean ; yarn install ; yarn install-bundle ; yarn bootstrap",
+    "build": "yarn build-all-prod",
     "build-all-dev": "lerna run build-dev",
     "build-all-prod": "lerna run build-prod",
     "inspector": "lerna run develop --scope=inspector --stream",
